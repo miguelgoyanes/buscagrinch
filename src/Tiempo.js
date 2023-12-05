@@ -27,13 +27,13 @@ export default function Tiempo({ running }) {
 
     return (
         <>
-            <div className='lcdText bg-light text-danger rounded-circle m-2' style={{ width: 64 }}>
+            <div className='lcdText bg-light text-danger rounded-pill m-2' style={{ width: 64 }}>
                 {minutes}
             </div>
-            <div className='align-self-center bg-light rounded-circle m-2'>
+            <div className='align-self-center bg-light rounded-pill m-2'>
                 <img src="grinch.png" style={{ width: 54 }} alt="acierto" />
             </div>
-            <div className='lcdText bg-light text-danger rounded-circle m-2' style={{ width: 64 }}>
+            <div className='lcdText bg-light text-danger rounded-pill m-2' style={{ width: 64 }}>
                 {seconds}
             </div>
         </>

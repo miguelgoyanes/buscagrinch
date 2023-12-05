@@ -3,14 +3,14 @@ function Celda({ valor, onCeldaClick }) {
     return (
         <div>
             <button 
-                className="border-0 rounded-circle p-0 fs-2 fw-bold text-danger"
-                style={{ width: 60, height: 60 }}
+                className="border-0 rounded p-0 m-1 fs-2 fw-bold text-light bg-transparent"
+                style={{ width: 50, height: 50 }}
                 onClick={onCeldaClick}
             >
                 {
                     valor === "oc" ?
                         <img 
-                            src="./regalo.png" 
+                            src="./regalo2.png" 
                             style={{ width: 40, display: 'block', margin: 'auto' }}
                             alt="Regalo"
                         /> : 

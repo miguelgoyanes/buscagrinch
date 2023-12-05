@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
+    <link rel="icon" href="./favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -32,19 +33,19 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
   </head>
-  <body class="bg-light">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <nav class="navbar text-bg-danger">
-      <div class="container justify-content-center">
-        <a class="navbar-brand text-light fs-1" href="#">
-          <img src="grinch.png" alt="Bootstrap" height="50">
-          Busca al Grinch
-        </a>
-      </div>
-    </nav>
-    <main class="mt-5">
-      <div id="root"></div>
-    </main>
+  <body class="bg-img" height="100vh">
+    <div class="bg-overlay" height="100vh">
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <nav class="bg-blur">
+        <div class="container d-flex justify-content-center align-items-center py-3">
+          <img src="grinch.png" alt="Bootstrap" height="60">
+          <h1 class="text-light fs-1 mx-3">Busca al Grinch</h1>
+        </div>
+      </nav>
+      <main class="mt-5">
+        <div id="root"></div>
+      </main>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   </body>
 </html>

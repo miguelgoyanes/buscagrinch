@@ -1,34 +1,105 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CalcularNuevaPartida from './helpers/CalcularNuevaPartida.js';
 import Tablero from './Tablero.js';
+import ControlScreen from './ControlScreen.js';
 
 function App() {
-
-  const tamañoTablero = 5
 
   // Definir State
   const [board, setBoard] = useState()
   const [arrayPlaceMines, setArrayPlaceMines] = useState()
+  const [controlSreen, setControlScreen] = useState({
+    show: true,
+    title: 'Comenzar Partida',
+    subtitle: 'Tienes muchos regalos que abrir, pero cuidado!!!! hay muchos grinch escondidos. Asegurate de que no te estrope la Navidad',
+    btnText: 'Jugar'
+    // time: null
+  })
+  const [running, setRunning] = useState(false);
+  const [difficulty, setDifficulty] = useState({
+    name: "facil",
+    row: 7,
+    col: 7,
+    mines: 5
+  })
 
-  useEffect(() => {
-    const [boardUpdate, arrayPlaceMinesUpdate] = CalcularNuevaPartida(tamañoTablero, 5)
+
+  // CONTROL SCREAN
+  const handleDifficultyChange = (event) => {
+    let row
+    let col
+    let mines
+    console.log(event.target.value)
+    switch (event.target.value) {
+      case "facil":
+        row = 7
+        col = 7
+        mines = 5
+        break;
+      case "normal":
+        row = 8
+        col = 10
+        mines = 10
+        break;
+      case "dificil":
+        row = 8
+        col = 15
+        mines = 15
+        break;
+      default:
+        console.log("Dificultad no reconocida");
+        break;
+    }
+    setDifficulty({
+      row: row,
+      col: col,
+      mines: mines
+    });
+  }
+  
+  const startGame = () => {
+    setControlScreen({...controlSreen, show: false})
+    setRunning(true)
+    
+    const [boardUpdate, arrayPlaceMinesUpdate] = CalcularNuevaPartida(difficulty.row, difficulty.col, difficulty.mines)
     setBoard(boardUpdate)
     console.log(boardUpdate)
     setArrayPlaceMines(arrayPlaceMinesUpdate)
-  }, []);
+  }
 
+  // TABLERO
+  const actualizarRunning = (valorRunning) => {
+    setRunning(valorRunning)
+  }
 
-  // Funcion de despuesta al BTN
-  const btnComenzar = () => {
-    // setBoard(Array(5).fill(Array(5).fill(" ")))
-  };
+  const actualizarControlScreen = (valorRunning) => {
+    setControlScreen(valorRunning)
+  }
 
   return (
-    <div className="container text-center"  style={{ width: 60*tamañoTablero + 50}}>
-        <Tablero board={board} arrayPlaceMines={arrayPlaceMines} tamañoTablero={tamañoTablero}/>
-        {/* <div><button className="btn btn-outline-secondary mt-2" onClick={btnComenzar}>COMIENZA LA PARTIDA</button></div> */}
-    </div>
+    <>
+      {
+        controlSreen.show ?
+          <ControlScreen
+            onPlay={() => startGame()}
+            title={controlSreen.title}
+            subtitle={controlSreen.subtitle}
+            btnText={controlSreen.btnText}
+            difficulty={difficulty}
+            onDifficultyChange={handleDifficultyChange}
+          /> :
+            <Tablero 
+              board={board} 
+              arrayPlaceMines={arrayPlaceMines} 
+              running={running}
+              actualizarRunning={actualizarRunning}
+              controlSreen={controlSreen}
+              actualizarControlScreen={actualizarControlScreen}
+              difficulty={difficulty}
+            />
+      }
+    </>
   );
 }
 

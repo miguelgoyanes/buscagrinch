@@ -1,8 +1,6 @@
-const CalcularNuevaPartida = (tamañoTablero, numMines) => {
+const CalcularNuevaPartida = (rows, cols, numMines) => {
 
-    // Crear una matriz 5x5 para representar el campo de juego
-    const rows = tamañoTablero;
-    const cols = tamañoTablero;
+    // Crear una matriz para representar el campo de juego
     let board = Array(rows)
         .fill(0)
         .map(() => Array(cols).fill(0));

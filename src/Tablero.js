@@ -3,24 +3,15 @@ import Tiempo from './Tiempo.js'
 import './App.css';
 import { useEffect, useState } from 'react';
 import AdjacentElements from './helpers/AdjacentElements.js';
-import VictoryScreen from './VictoryScreen.js';
 
-function Tablero({board, arrayPlaceMines, tamañoTablero}) {
+function Tablero({board, arrayPlaceMines, running, actualizarRunning, controlSreen, actualizarControlScreen, difficulty}) {
 
     // Definir State
     const [boardJugando, setBoardJugando] = useState(() => {
-        return Array(tamañoTablero).fill().map(() => Array(tamañoTablero).fill("oc"));
+        return Array(difficulty.row).fill().map(() => Array(difficulty.col).fill("oc"));
     });
     const [celdasVistas, setCeldasVistas] = useState([])
     const [listCeldasPorComprobar, setListCeldasPorComprobar] = useState([])
-    const [victoryScreen, setVictoryScreen] = useState({
-        show: true,
-        title: 'Comenzar Partida',
-        subtitle: 'Te atreves a jugar ?',
-        btnText: 'Jugar'
-        // time: null
-    })
-    const [running, setRunning] = useState(false);
 
 
 
@@ -40,34 +31,44 @@ function Tablero({board, arrayPlaceMines, tamañoTablero}) {
         valoresNuevos[row][col] = board[row][col]
         setBoardJugando(valoresNuevos)
 
-        if (valoresNuevos[row][col] === 'M') {
-            // mostrar todo
-            setBoardJugando(board)
-
-            // parar cronometro
-            setRunning(false)
-
-            setVictoryScreen({
-                show: true, 
-                title: '¡Has Perdido!',
-                subtitle: 'Has pisado una mina, prueba otra vez',
-                btnText: 'Volver a Jugar'
-            })
-        }
+        // Comprobar si has perdido
+        comprobarEliminar(valoresNuevos, row, col)
         
         let copiaCeldasVistas = celdasVistas.slice();
-        if (!copiaCeldasVistas.some(([r, c]) => r === row && c === col)) {
+        if (!copiaCeldasVistas.some(item => JSON.stringify(item) === JSON.stringify([row, col]))) {
             copiaCeldasVistas.push([row, col]);
             setCeldasVistas(copiaCeldasVistas);
         }
+        console.log([row, col], copiaCeldasVistas)
 
+        // Comprovar si has clicado en un 0 que tenga hermanos 0
+        comprobarSiClick0ConHermanos(copiaCeldasVistas, valoresNuevos, row, col)
+
+        comprobarGanar(valoresNuevos)
+    }
+
+    const comprobarEliminar = (valoresNuevos, row, col) => {
+        if (valoresNuevos[row][col] === 'M') {
+            setTimeout(() => {
+                actualizarControlScreen({
+                    show: true, 
+                    title: '¡Has Perdido!',
+                    subtitle: 'Has pisado una mina, prueba otra vez',
+                    btnText: 'Volver a Jugar'
+                })
+            }, 3000);
+            
+            setBoardJugando(board)
+            actualizarRunning(false)
+        }
+    }
+
+    const comprobarSiClick0ConHermanos = (copiaCeldasVistas, valoresNuevos, row, col) => {
         if (valoresNuevos[row][col] === 0) {
-            // aqui calcular los adkacentrs elements y meterlos en listaCelsasporcomproba
-            const adjacentsElements = AdjacentElements(row, col, tamañoTablero, copiaCeldasVistas)
+            const adjacentsElements = AdjacentElements(row, col, difficulty.row, difficulty.col, copiaCeldasVistas)
 
             let set1 = new Set(listCeldasPorComprobar.map(JSON.stringify));
             let set2 = new Set(adjacentsElements.map(JSON.stringify));
-            // Unir los conjuntos
             let resultado = Array.from(new Set([...set1, ...set2].map(JSON.parse)));
             // eliminar resultados que esten en celdasvistas
             resultado = resultado.filter(item => !copiaCeldasVistas.some(subItem => JSON.stringify(subItem) === JSON.stringify(item)));
@@ -76,19 +77,26 @@ function Tablero({board, arrayPlaceMines, tamañoTablero}) {
         }
     }
 
-    const handleWinCondition = () => {
-        // Lógica para verificar la condición de victoria
-        setVictoryScreen({...victoryScreen, show: true});
+    const comprobarGanar = () => {
+        // console.log(difficulty.row * difficulty.col - difficulty.mines)
+        if (celdasVistas.length == difficulty.row * difficulty.col - difficulty.mines) {
+            setTimeout(() => {
+                actualizarControlScreen({
+                    show: true, 
+                    title: '¡Has Ganado!',
+                    subtitle: `Felicidades, has conseguido abrir todos los regalos sin encontrarte al Grinch en la dificultad ${difficulty.name}`,
+                    btnText: 'Volver a Jugar'
+                })
+            }, 3000);
+            
+            actualizarRunning(false)
+        }
     };
 
-    const startGame = () => {
-        setVictoryScreen({...victoryScreen, show: false})
-        setRunning(true)
-    }
 
 
     return (
-        <div className="grid bg-success py-2 px-4 rounded-3 m-0">
+        <div className="grid bg-blur text-center p-4 border border-3 rounded-5 m-auto" style={{ width: 60*difficulty.col + 50 }}>
             <div className="row ">
                 <div className="d-flex flex-wrap justify-content-around">
                     <Tiempo running={running}/>
@@ -101,7 +109,9 @@ function Tablero({board, arrayPlaceMines, tamañoTablero}) {
                             boardJugando && (
                                 boardJugando.map((row, indrow) =>
                                     row.map((val, indcol) =>
-                                        <div className="col-auto p-0" key={`${indrow}${indcol}`}><Celda valor={val} onCeldaClick={() => mostrarValor(indrow, indcol)} /></div>
+                                        <div className="col-auto p-0" key={`${indrow}${indcol}`}>
+                                            <Celda valor={val} onCeldaClick={() => mostrarValor(indrow, indcol)} />
+                                        </div>
                                     )
                                 )
                             )
@@ -109,13 +119,6 @@ function Tablero({board, arrayPlaceMines, tamañoTablero}) {
                     </div>
                 </div>
             </div>
-            <VictoryScreen
-                show={victoryScreen.show}
-                onPlay={() => startGame()}
-                title={victoryScreen.title}
-                subtitle={victoryScreen.subtitle}
-                btnText={victoryScreen.btnText}
-            />
         </div>
     );
 }
