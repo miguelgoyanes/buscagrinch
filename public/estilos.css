@@ -76,3 +76,6 @@
     /* background-color: #473939; */
     backdrop-filter: blur(25px);
 }
+.justifyText {
+    text-align: justify;
+}

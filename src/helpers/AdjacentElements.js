@@ -1,6 +1,6 @@
 
 // Función para contar minas adyacentes
-function AdjacentElements(row, col, rows, cols, celdasVistas) {
+function AdjacentElements(row, col, rows, cols) {
     const directions = [
         [-1, -1], [-1, 0], [-1, 1],
         [0, -1],           [0, 1],
@@ -18,10 +18,8 @@ function AdjacentElements(row, col, rows, cols, celdasVistas) {
             && newRow < rows 
             && newCol >= 0 
             && newCol < cols) {
-                // asi comprobamos si la celda ya esta en celdasVistas
-                if (!celdasVistas.some(cell => JSON.stringify(cell) === JSON.stringify([newRow, newCol]))) {
-                    adjacentsElements.push([newRow, newCol])
-                }                
+            // asi comprobamos si la celda ya esta en celdasVistas
+            adjacentsElements.push([newRow, newCol])             
         }
     }
 

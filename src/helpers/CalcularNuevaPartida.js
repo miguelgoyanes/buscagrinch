@@ -62,7 +62,7 @@ const CalcularNuevaPartida = (rows, cols, numMines) => {
         }
     }
 
-    return [board, arrayPlaceMines]
+    return board
 }
 
 export default CalcularNuevaPartida
