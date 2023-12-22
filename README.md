@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# BuscaGrinch
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+¡Bienvenido a BuscaGrinch! 🎄🔍 Este es un juego de Buscaminas con un toque navideño, donde tu objetivo es abrir todos los regalos sin revelar al Grinch.
 
-## Available Scripts
+## Cómo Jugar
 
-In the project directory, you can run:
+- **Regalos y el Grinch:** En lugar de casillas, tendrás una cuadrícula de regalos. La mayoría de los regalos contienen sorpresas agradables, pero algunos esconden al Grinch. Tu objetivo es abrir todos los regalos sin encontrar a ningún Grinch.
 
-### `npm start`
+- **Números en los regalos:** Al igual que en el buscaminas clásico, los regalos tendrán números que indicarán cuántos Grinches están en los regalos adyacentes. Esto te ayudará a saber qué regalos evitar.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **La Campana de Navidad:** Esta será tu aliada. Si haces clic en la Campana de Navidad, podrás marcar los regalos sospechosos con pequeñas campanas navideñas para recordar dónde podrían estar los Grinches. Tendrás tantas campanas como Grinch haya escondidos.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Evita al Grinch:** Si abres un regalo y encuentras al Grinch, ¡perderás el juego! Sin embargo, si logras abrir todos los regalos sin encontrar al Grinch, ¡habrás ganado y salvado la Navidad!
 
-### `npm test`
+- **Estrategia:** Usa la información de los números en los regalos para tomar decisiones. Empieza por abrir los regalos que tienen menos regalos adyacentes, ya que tienen menos probabilidades de esconder al Grinch.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Tiempo:** El tiempo es simplemente un indicador de tu progreso. No hay un límite de tiempo establecido, así que tómate tu tiempo para resolver el desafío.
 
-### `npm run build`
+- **Dificultades:** Hay tres niveles de dificultad para este juego. Podrás elegir entre fácil, medio o difícil al comenzar, lo que afectará la cantidad de regalos y la cantidad de Grinches escondidos.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Autor
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Nombre**: Miguel Angel Goyanes López
+- **Contacto**: amiguelgoyanes@gmail.com

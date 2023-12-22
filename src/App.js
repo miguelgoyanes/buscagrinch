@@ -7,22 +7,22 @@ import Instrucciones from "./Instrucciones.js";
 
 function App() {
   // Definir State
-  const [board, setBoard] = useState();
+  const [board, setBoard] = useState()
   const [controlSreen, setControlScreen] = useState({
     show: true,
     title: "Comenzar Partida",
     subtitle:
       "Tienes muchos regalos que abrir, pero cuidado!!!! hay muchos Grinch escondidos. Asegurate de que no te estrope la Navidad",
     btnText: "Jugar",
-  });
-  const [running, setRunning] = useState(false);
+  })
+  const [running, setRunning] = useState(false)
   const [difficulty, setDifficulty] = useState({
     name: "facil",
     row: 8,
     col: 8,
     mines: 8,
-  });
-  const [showIntrucciones, setShowIntrucciones] = useState(false);
+  })
+  const [showIntrucciones, setShowIntrucciones] = useState(false)
 
   // CONTROL SCREAN
   // funcion que meneja la dificultad y el tamaño del tablero
@@ -30,7 +30,6 @@ function App() {
     let row;
     let col;
     let mines;
-    console.log(event.target.value);
     switch (event.target.value) {
       case "facil":
         row = 8;
@@ -48,44 +47,43 @@ function App() {
         mines = 15;
         break;
       default:
-        console.log("Dificultad no reconocida");
+        console.log("Dificultad no reconocida")
         break;
     }
     setDifficulty({
       row: row,
       col: col,
       mines: mines,
-    });
-  };
+    })
+  }
 
   // genera el tablero y pone todo en marcha
   const startGame = () => {
-    setControlScreen({ ...controlSreen, show: false });
-    setRunning(true);
+    setControlScreen({ ...controlSreen, show: false })
+    setRunning(true)
 
     const boardUpdate = CalcularNuevaPartida(
       difficulty.row,
       difficulty.col,
       difficulty.mines
-    );
-    setBoard(boardUpdate);
-    console.log(boardUpdate);
-  };
+    )
+    setBoard(boardUpdate)
+  }
 
   const handleIntrucciones = () => {
-    setShowIntrucciones(!showIntrucciones);
-  };
+    setShowIntrucciones(!showIntrucciones)
+  }
 
   // TABLERO
   // maneja la pausa del cronometro
   const actualizarRunning = (valorRunning) => {
-    setRunning(valorRunning);
-  };
+    setRunning(valorRunning)
+  }
 
   // maneja los mensajes y valores de la pantalla de control
   const actualizarControlScreen = (valorControlScreen) => {
-    setControlScreen(valorControlScreen);
-  };
+    setControlScreen(valorControlScreen)
+  }
 
   return (
     <>
@@ -111,7 +109,7 @@ function App() {
 
       <Instrucciones show={showIntrucciones} onClose={handleIntrucciones} />
     </>
-  );
+  )
 }
 
 export default App;
